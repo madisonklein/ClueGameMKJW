@@ -18,8 +18,15 @@ public class IntBoard {
 	
 
 	public void calcAdjacencies(BoardCell cell){
-		if((cell.getRow() > 0) && (cell.getRow() < 3)){
-			if((cell.getColumn() > 0) && (cell.getColumn() < 3)){
+		if((cell.getRow() >= 0) && (cell.getRow() < 4)){
+			for (int i = cell.getRow(); i <=1; i++){
+				for (int j = cell.getColumn(); j <=1; j++){
+					if (i != null && j != null){
+						//set.add something
+					}
+				}
+			}
+			if((cell.getColumn() > 0) && (cell.getColumn() < 4)){
 			}
 			if(cell.getColumn() == 0){
 			}

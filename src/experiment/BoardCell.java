@@ -4,8 +4,14 @@ import java.util.*;
 
 public class BoardCell {
 	private int row, column;
-	
-	List<BoardCell> targets;
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
 
 	public BoardCell(int row, int column) {
 		super();

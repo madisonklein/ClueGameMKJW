@@ -17,7 +17,32 @@ public class IntBoard {
 	}
 	
 
-	public void calcAdjacencies(){
+	public void calcAdjacencies(BoardCell cell){
+		if((cell.getRow() > 0) && (cell.getRow() < 3)){
+			if((cell.getColumn() > 0) && (cell.getColumn() < 3)){
+			}
+			if(cell.getColumn() == 0){
+			}
+			if(cell.getColumn() == 3){
+			}
+		}
+		else if(cell.getRow() == 0){
+			if((cell.getColumn() > 0) && (cell.getColumn() < 3)){
+			}
+			if(cell.getColumn() == 0){
+			}
+			if(cell.getColumn() == 3){
+			}
+		}
+		else if(cell.getRow() == 3){
+			if((cell.getColumn() > 0) && (cell.getColumn() < 3)){
+			}
+			if(cell.getColumn() == 0){
+			}
+			if(cell.getColumn() == 3){
+			}
+		}
+		
 	}
 	
 	public void calcTargets(BoardCell startCell,int pathLength){	

@@ -8,6 +8,7 @@ public class IntBoard {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visitedList;
 
+	public static final int SIZE = 4;
 	
 	
 	public IntBoard() {
@@ -15,94 +16,99 @@ public class IntBoard {
 		adjacencyMap = new HashMap<BoardCell, Set<BoardCell>>();
 		visitedList = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
-		//board = new BoardCell[4][4];
-		for (int i = 0; i < 4; i++){
-			for (int j = 0; j < 4; j++){
+		board = new BoardCell[SIZE][SIZE];
+		for (int i = 0; i < SIZE; i++){
+			for (int j = 0; j < SIZE; j++){
 				board[i][j] = new BoardCell(i,j);
 			}
+			System.out.println(board[i][1].getRow());
 		}
+		calcAdjacencies();
 	}
 	
 
-	public void calcAdjacencies(BoardCell cell){
-		Set<BoardCell> temp = null;
-		if((cell.getRow() > 0) && (cell.getRow() < 4)){
-			if((cell.getColumn() >= 0) && (cell.getColumn() < 4)){
-				temp.add(board[cell.getRow() - 1][cell.getColumn()]);
-				temp.add(board[cell.getRow() + 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() - 1]);
-				temp.add(board[cell.getRow()][cell.getColumn() + 1]);						
+	public void calcAdjacencies(){
+		for(int row = 0; row < SIZE; row++){
+			for(int col = 0; col < SIZE; col++){
+			Set<BoardCell> temp = new HashSet<BoardCell>();
+			if((row > 0) && (row < 3)){
+			if((col > 0) && (col < 3)){
+				temp.add(board[row - 1][col]);
+				temp.add(board[row + 1][col]);
+				temp.add(board[row][col - 1]);
+				temp.add(board[row][col + 1]);
+				}
+			else if(col == 0){
+				temp.add(board[row - 1][col]);
+				temp.add(board[row + 1][col]);
+				temp.add(board[row][col + 1]);	
 			}
-			if(cell.getColumn() == 0){
-				temp.add(board[cell.getRow() - 1][cell.getColumn()]);
-				temp.add(board[cell.getRow() + 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() + 1]);	
+			else if(col == 3){
+				temp.add(board[row - 1][col]);
+				temp.add(board[row + 1][col]);
+				temp.add(board[row][col - 1]);
+				}
 			}
-			if(cell.getColumn() == 3){
-				temp.add(board[cell.getRow() - 1][cell.getColumn()]);
-				temp.add(board[cell.getRow() + 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() - 1]);
+			else if(row == 0){
+				if((col > 0) && (col < 3)){
+					temp.add(board[row + 1][col]);
+					temp.add(board[row][col - 1]);
+					temp.add(board[row][col + 1]);	
+				}
+				else if(col == 0){
+					temp.add(board[row + 1][col]);
+					temp.add(board[row][col + 1]);	
+				}
+				else if(col == 3){
+					temp.add(board[row + 1][col]);
+					temp.add(board[row][col - 1]);	
+				}
 			}
+			else if(row == 3){
+				if((col > 0) && (col < 3)){
+					temp.add(board[row - 1][col]);
+					temp.add(board[row][col - 1]);
+					temp.add(board[row][col + 1]);
+				}
+				if(col == 0){
+					temp.add(board[row - 1][col]);
+					temp.add(board[row][col + 1]);	
+					}
+				if(col == 3){
+					temp.add(board[row - 1][col]);
+					temp.add(board[row][col- 1]);
+					}
+				}
+				adjacencyMap.put(this.getCell(row, col), temp);
+			}				
 		}
-		else if(cell.getRow() == 0){
-			if((cell.getColumn() > 0) && (cell.getColumn() < 3)){
-				temp.add(board[cell.getRow() + 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() - 1]);
-				temp.add(board[cell.getRow()][cell.getColumn() + 1]);	
-			}
-			if(cell.getColumn() == 0){
-				temp.add(board[cell.getRow() + 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() + 1]);	
-			}
-			if(cell.getColumn() == 3){
-				temp.add(board[cell.getRow() + 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() - 1]);	
-			}
-		}
-		else if(cell.getRow() == 3){
-			if((cell.getColumn() > 0) && (cell.getColumn() < 3)){
-				temp.add(board[cell.getRow() - 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() - 1]);
-				temp.add(board[cell.getRow()][cell.getColumn() + 1]);
-			}
-			if(cell.getColumn() == 0){
-				temp.add(board[cell.getRow() - 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() + 1]);	
-			}
-			if(cell.getColumn() == 3){
-				temp.add(board[cell.getRow() - 1][cell.getColumn()]);
-				temp.add(board[cell.getRow()][cell.getColumn() - 1]);
-			}
-		}
-		adjacencyMap.put(cell, temp);
-}
-		
+	}
 	
 	public void calcTargets(BoardCell startCell,int pathLength){
 		visitedList.add(startCell);
 		findAllTargets(startCell, pathLength);
-		
 	}
 	
 	public void findAllTargets(BoardCell thisCell, int numSteps){
 		Set<BoardCell> list = getAdjList(thisCell);
 		for(BoardCell a : list){
 			if(visitedList.contains(a)){
-				return;
 			}
-			visitedList.add(a);
-			if(numSteps == 1){
-				 targets.add(a);
-				}
 			else{
-				findAllTargets(a, numSteps - 1);
+				visitedList.add(a);
+				if(numSteps == 1){
+					targets.add(a);
+					}
+				else{
+					findAllTargets(a, numSteps - 1);
+				}
+				visitedList.remove(a);
 			}
-			visitedList.remove(a);
 		}
 	}
 	
 	public Set<BoardCell> getTargets(){
-		return null;
+		return targets;
 	}
 	
 	public Set<BoardCell> getAdjList(BoardCell test){

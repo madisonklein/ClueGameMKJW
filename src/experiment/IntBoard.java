@@ -2,6 +2,8 @@ package experiment;
 
 import java.util.*;
 
+import clueGame.BoardCell;
+
 public class IntBoard {
 	private BoardCell[][] board;
 	private Map<BoardCell, Set <BoardCell>> adjacencyMap;
@@ -19,7 +21,7 @@ public class IntBoard {
 		board = new BoardCell[SIZE][SIZE];
 		for (int i = 0; i < SIZE; i++){
 			for (int j = 0; j < SIZE; j++){
-				board[i][j] = new BoardCell(i,j);
+				board[i][j] = new BoardCell(i,j, 'W');
 			}
 			System.out.println(board[i][1].getRow());
 		}

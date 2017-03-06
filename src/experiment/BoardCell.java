@@ -1,7 +1,5 @@
 package experiment;
 
-import java.util.*;
-
 public class BoardCell {
 	private int row, column;
 

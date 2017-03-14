@@ -1,0 +1,11 @@
+M, Master, Card
+K, K-Room, Card
+N, N-Room, Card
+L, Library, Card
+D, Dungeon, Card
+S, Studio, Card
+B, Bar, Card
+A, Attic, Card
+C, Cinema, Card
+H, Hallway, Other
+X, Rotunda, Other

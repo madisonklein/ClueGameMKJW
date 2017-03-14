@@ -1,0 +1,50 @@
+We used Pair programming for the whole thing!
+
+
+commit c3747a0f523a50a410fbb49ee734e0f300a52bd7
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Mar 6 14:09:26 2017 -0700
+
+    Board 1 - 4, BadConfig Exception not working
+
+commit 020741cfe62cb9642c7267b402a6256d5430ddd4
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Mar 6 14:00:20 2017 -0700
+
+    New Stuff
+
+commit 1952b2396b8efa18089e43bb4636ae8c605a9659
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Wed Mar 1 16:03:00 2017 -0700
+
+    Failing Test Part I
+
+commit abe75d994d1b8a3dd606ed4e8f0b9753f0a9a5cd
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Feb 27 21:09:43 2017 -0700
+
+    Final solutiongit status!
+
+commit 1394369e45ba6a4bf1bef0aa25087f4374860a6e
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Feb 27 15:47:49 2017 -0700
+
+    Our solution, but with errors, bc test are still failing
+
+commit 1d1576c928a567f337042d9ee641f0f4ceaaee2d
+Author: Kevin May <kemay@mines.edu>
+Date:   Mon Feb 27 14:37:04 2017 -0700
+
+    trying to implement calcAdjencies
+
+commit 88148b5d936b9f3c2c7383505be2371894a031c0
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Feb 27 12:20:23 2017 -0700
+
+    The if statements for the cells at the edges of the board
+
+commit 7f2053b16973c031cd44ec505506188444051ea4
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Sat Feb 25 12:07:49 2017 -0700
+
+    The clue path PartI

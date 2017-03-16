@@ -1,0 +1,6 @@
+Dr. Rader, blue, 10, 0
+Kevin, red, 19, 6
+Niki, yellow, 7, 19
+Brandon, black, 1 19
+Maddie, gray, 19, 11
+Bill Murray, purple, 6, 10

@@ -20,7 +20,7 @@ public class AdjacenciesTargetTest {
 		// Board is singleton, get the only instance and initialize it		
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("Layout.csv", "Legend.txt");		
+		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");		
 		try {
 			board.initialize();
 		} catch (IOException e) {

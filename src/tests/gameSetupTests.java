@@ -20,15 +20,15 @@ import clueGame.Player;
 public class gameSetupTests {
 
 	private static Board board;
-	private static final int DECK_SIZE = 21;
+	private static final int DECK_SIZE = 23;
 	private static final int NUM_PEOPLE = 6;
 	private static final int NUM_WEAPONS = 6;
-	private static final int NUM_ROOMS = 9;
+	private static final int NUM_ROOMS = 11;
 	
 	@Before
 	public void setUpClass() throws IOException, BadConfigFormatException  {
 		board = Board.getInstance();
-		board.setConfigFiles("Layout.csv", "Legend.txt");
+		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");
 		// board.initalize() loads config files, creates the deck, and deals the cards
 		board.initialize();
 	}
@@ -36,7 +36,7 @@ public class gameSetupTests {
 	@Test
 	public void testPeople() {
 		ArrayList<ComputerPlayer> people = board.getPeople();
-		assertEquals(people.size() - 1, NUM_PEOPLE);
+		assertEquals(people.size() + 1, NUM_PEOPLE);
 		HumanPlayer human = board.getHumanPlayer();
 		assertTrue(human.equals(new HumanPlayer("Dr. Rader", 10, 0, Color.blue)));
 		assertTrue(people.get(0).equals(new ComputerPlayer("Kevin", 19, 6, Color.red)));
@@ -48,7 +48,7 @@ public class gameSetupTests {
 	public void testCreateDeck() {
 		board.createDeck();
 		ArrayList<Card> deck = board.getDeck();
-		assertEquals(deck.size(), 21);
+		assertEquals(deck.size(), DECK_SIZE);
 		int people=0, rooms=0, weapons=0;
 		for (Card c : deck) {
 			if (c.getCardType() == CardType.PERSON) people++;
@@ -59,7 +59,7 @@ public class gameSetupTests {
 		assertEquals(weapons, NUM_WEAPONS);
 		assertEquals(rooms, NUM_ROOMS);
 		assertTrue(deck.contains(new Card("Dr. Rader", CardType.PERSON)));
-		assertTrue(deck.contains(new Card("Knife", CardType.WEAPON)));
+		assertTrue(deck.contains(new Card("knife", CardType.WEAPON)));
 		assertTrue(deck.contains(new Card("Dungeon", CardType.ROOM)));
 	}
 	

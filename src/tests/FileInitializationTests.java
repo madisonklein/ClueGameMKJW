@@ -25,7 +25,7 @@ public class FileInitializationTests {
 	@BeforeClass
 	public static void setUp() throws IOException, BadConfigFormatException {	
 	board = Board.getInstance();
-	board.setConfigFiles("Layout.csv", "Legend.txt");
+	board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");
 	board.initialize();
 	}
 	

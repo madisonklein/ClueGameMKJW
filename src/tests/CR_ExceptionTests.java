@@ -22,7 +22,7 @@ public class CR_ExceptionTests {
 		// Note that we are using a LOCAL Board variable, because each 
 		// test will load different files
 		Board board = Board.getInstance();
-		board.setConfigFiles("CR_ClueLayoutBadColumns.csv", "CR_ClueLegend.txt");
+		board.setConfigFiles("CR_ClueLayoutBadColumns.csv", "CR_ClueLegend.txt", "People.txt");
 		// Instead of initialize, we call the two load functions directly.
 		// This is necessary because initialize contains a try-catch. 
 		board.loadRoomConfig();
@@ -35,7 +35,7 @@ public class CR_ExceptionTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws BadConfigFormatException, IOException {
 		Board board = Board.getInstance();
-		board.setConfigFiles("CR_ClueLayoutBadRoom.csv", "CR_ClueLegend.txt");
+		board.setConfigFiles("CR_ClueLayoutBadRoom.csv", "CR_ClueLegend.txt", "People.txt");
 		board.loadRoomConfig();
 		board.loadBoardConfig();
 	}
@@ -45,7 +45,7 @@ public class CR_ExceptionTests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoomFormat() throws BadConfigFormatException, IOException {
 		Board board = Board.getInstance();
-		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegendBadFormat.txt");
+		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegendBadFormat.txt", "People.txt");
 		board.loadRoomConfig();
 	}
 

@@ -1,9 +1,11 @@
 package clueGame;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,8 +22,14 @@ public class Board {
 	private int numRows;
 	private int numCols;
 	private String boardConfigFile;			
-	private String roomConfigFile;			
-
+	private String roomConfigFile;	
+	private String peopleConfigFile;
+	private ArrayList<ComputerPlayer> people;
+	private HumanPlayer human;
+	private ArrayList<Card> deck;
+	private Map<Player, ArrayList<Card>> hands;
+	private String[] weapons = { "knife", "brass knuckles", "rifle", "banana", "flail", "Spear" };
+	
 	public static final int MAX_BOARD_SIZE = 40;
 	
 	private Board() {
@@ -129,6 +137,10 @@ public class Board {
 		loadRoomConfig();	
 	    
 		calcAdjacencies();
+		
+		loadPeople();
+		createDeck();
+		dealHands();
 	}
 
 	//CALCADJACENCIES AND CALCTARGETS
@@ -212,9 +224,10 @@ public class Board {
 		}
 	}
 	
-	public void setConfigFiles(String ClueLayout, String ClueLegend){
+	public void setConfigFiles(String ClueLayout, String ClueLegend, String people){
 		boardConfigFile = ClueLayout;
 		roomConfigFile = ClueLegend;
+		peopleConfigFile = people;
 	}
 	
 	public boolean isAdj(int row, int col, int a, int b){
@@ -265,10 +278,38 @@ public class Board {
 	}
 	
 	public void createDeck() {
+		  
+		deck = new ArrayList<Card>();
+		
+		for (ComputerPlayer p: people) deck.add(new Card(p.getName(), CardType.PERSON));
+		deck.add(new Card(human.getName(), CardType.PERSON));
+		for (Character c: legend.keySet()) deck.add(new Card(legend.get(c), CardType.ROOM));
+		for (String s: weapons) deck.add(new Card(s, CardType.WEAPON));
+		
 		
 	}
 	
 	public void dealHands() {
+		int minHandSize = deck.size()/ (people.size()+1);
+		hands = new HashMap<Player, ArrayList<Card>>();
+		for (ComputerPlayer p: people) {
+			ArrayList<Card> temp = new ArrayList<Card>();
+			hands.put(p, temp);
+		}
+		ArrayList<Card> temp = new ArrayList<Card>();
+		hands.put(human, temp);
+		for (Player p: hands.keySet()) {
+			for (int i = 0; i < minHandSize; i++) {
+				int index = (int) (Math.random() * (deck.size() -1));
+				hands.get(p).add(deck.remove(index));
+			}
+		}
+		if (deck.size() != 0) {
+			for (Player p: hands.keySet()) {
+				if (deck.size() == 0) break;
+				else hands.get(p).add(deck.remove(0));
+			}
+		}
 		
 	}
 	
@@ -320,19 +361,19 @@ public class Board {
 	}
 	
 	public ArrayList<Card> getDeck() {
-		return new ArrayList<Card>();
+		return deck;
 	}
 	
 	public Map<Player, ArrayList<Card>> getHands() {
-		return new HashMap<Player, ArrayList<Card>>();
+		return hands;
 	}
 	
 	public HumanPlayer getHumanPlayer() {
-		return null;
+		return human;
 	}
 	
 	public ArrayList<ComputerPlayer> getPeople() {
-		return null;
+		return people;
 	}
 	
 	//LOAD THE CONFIGS
@@ -360,6 +401,38 @@ public class Board {
 	}
 	
 	//loadBoardConfig() is the same as in the initialize function, but when we are trying to replace the code in the initialize with this function it is not working
+	
+	public void loadPeople() throws BadConfigFormatException {
+		people = new ArrayList<ComputerPlayer>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(peopleConfigFile));
+			String line = br.readLine();
+			String[] temp = line.split(", ");
+			if (temp.length != 4) throw new BadConfigFormatException();
+			human = new HumanPlayer(temp[0], Integer.parseInt(temp[1]), Integer.parseInt(temp[2]), convertColor(temp[3]));
+			line = br.readLine();
+			while (line != null) {
+				temp = line.split(", ");
+				people.add(new ComputerPlayer(temp[0], Integer.parseInt(temp[1]), Integer.parseInt(temp[2]), convertColor(temp[3])));
+				line = br.readLine();
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public Color convertColor(String strColor) {
+		Color color;
+		try {
+			Field field = Class.forName("java.awt.Color").getField(strColor.trim());
+			color = (Color)field.get(null);
+		}
+		catch (Exception e) {
+			color = null;
+		}
+		return color;
+	}
 	
 	public void loadBoardConfig() throws BadConfigFormatException{
 		int counterRow = 0;

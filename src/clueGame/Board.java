@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -262,6 +263,15 @@ public class Board {
 		}
 		return true;
 	}
+	
+	public void createDeck() {
+		
+	}
+	
+	public void dealHands() {
+		
+	}
+	
 	//SETTER & GETTER FUNCTIONS
 
 	public void setNumRows(int numRows) {
@@ -307,6 +317,22 @@ public class Board {
 
 	public int getNumColumns() {
 		return numCols;
+	}
+	
+	public ArrayList<Card> getDeck() {
+		return new ArrayList<Card>();
+	}
+	
+	public Map<Player, ArrayList<Card>> getHands() {
+		return new HashMap<Player, ArrayList<Card>>();
+	}
+	
+	public HumanPlayer getHumanPlayer() {
+		return null;
+	}
+	
+	public ArrayList<ComputerPlayer> getPeople() {
+		return null;
 	}
 	
 	//LOAD THE CONFIGS

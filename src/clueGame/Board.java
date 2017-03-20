@@ -29,6 +29,7 @@ public class Board {
 	private ArrayList<Card> deck;
 	private Map<Player, ArrayList<Card>> hands;
 	private String[] weapons = { "knife", "brass knuckles", "rifle", "banana", "flail", "Spear" };
+	private Solution solution;
 	
 	public static final int MAX_BOARD_SIZE = 40;
 	
@@ -371,6 +372,12 @@ public class Board {
 	public ArrayList<ComputerPlayer> getPeople() {
 		return people;
 	}
+	public void setSolution(Solution sol) {
+		this.solution = sol;
+	}
+	public Solution getSolution() {
+		return solution;
+	}
 	
 	//LOAD THE CONFIGS
 	
@@ -519,6 +526,12 @@ public class Board {
 	        	 col += 1;
 	         }
 	      }
+		
+	}
+	//Solution Test Methods
+	
+	public boolean checkAccusation(Solution sol) {
+		return solution.equals(sol);
 		
 	}
 }

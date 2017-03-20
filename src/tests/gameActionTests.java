@@ -12,6 +12,7 @@ import org.junit.Test;
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.ComputerPlayer;
+import clueGame.Solution;
 import clueGame.BoardCell;
 
 public class gameActionTests {
@@ -77,6 +78,17 @@ public class gameActionTests {
 		assertTrue(loc_4_7);
 		assertTrue(loc_3_6);
 		assertTrue(loc_5_6);
+	}
+	@Test
+	public void testAccusation() {
+		board.setSolution(new Solution("Boolena", "Boolane", "Bool"));
+		
+		assertTrue(board.checkAccusation(new Solution("Boolena", "Boolane", "Bool")));
+		assertFalse(board.checkAccusation(new Solution("Boolean", "Boolane", "Bool")));
+		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolean", "Bool")));
+		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolane", "Boolean")));
+		assertFalse(board.checkAccusation(new Solution("Boolean", "Boolean", "Boolean")));
+		
 	}
 
 }

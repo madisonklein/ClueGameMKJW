@@ -7,7 +7,8 @@ import java.util.Set;
 public class ComputerPlayer extends Player{
 	
 	private ArrayList<BoardCell> visitedRooms;
-
+	private Solution solution;
+	
 	public ComputerPlayer() {
 		super("test", 0, 0, Color.red);
 		visitedRooms = new ArrayList<BoardCell>();

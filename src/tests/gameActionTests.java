@@ -79,16 +79,16 @@ public class gameActionTests {
 		assertTrue(loc_3_6);
 		assertTrue(loc_5_6);
 	}
+	
 	@Test
 	public void testAccusation() {
 		board.setSolution(new Solution("Boolena", "Boolane", "Bool"));
-		
+	
 		assertTrue(board.checkAccusation(new Solution("Boolena", "Boolane", "Bool")));
 		assertFalse(board.checkAccusation(new Solution("Boolean", "Boolane", "Bool")));
 		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolean", "Bool")));
 		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolane", "Boolean")));
 		assertFalse(board.checkAccusation(new Solution("Boolean", "Boolean", "Boolean")));
-		
 	}
 
 }

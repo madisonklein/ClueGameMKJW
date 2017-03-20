@@ -48,3 +48,118 @@ Author: ngrotz <ngrotz@mines.edu>
 Date:   Sat Feb 25 12:07:49 2017 -0700
 
     The clue path PartI
+commit bfdcb5487662a04c5e51a3b5ce3e6fd5826d99cd
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Thu Mar 16 22:12:46 2017 -0600
+
+    setup tests pass
+
+commit 78616414f2588985d1209b847d59c31f073a53a2
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Thu Mar 16 21:05:25 2017 -0600
+
+    setup tests compile but fail
+
+commit cf281d3e90489a150012818bae595c913a2e1a1e
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Thu Mar 16 12:15:10 2017 -0600
+
+    started people and createDeck tests
+
+commit a00c797b57dc9adf6082a515162b12063f4b26ff
+Merge: 1bc7fd8 7f3ce38
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Thu Mar 16 11:50:38 2017 -0600
+
+    Merge branch 'master' of https://github.com/bshevela/ClueGameMKBSv2
+
+commit 1bc7fd8e2972f57e428bc05553eaaa120cbc82ac
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Thu Mar 16 11:50:16 2017 -0600
+
+    Adding equals method to Card
+
+commit 7f3ce386aa33ff552801579173a85e53c18813c7
+Merge: 1b4c353 ea21c54
+Author: Brandon Shevela <bshevela@mines.edu>
+Date:   Thu Mar 16 11:46:14 2017 -0600
+
+    Merge branch 'master' of http://github.com/bshevela/ClueGameMKBSv2
+
+commit 1b4c35305641b3431375887aa268ce61db72f271
+Author: Brandon Shevela <bshevela@mines.edu>
+Date:   Thu Mar 16 11:45:51 2017 -0600
+
+    Added Human and Computer players classes
+
+commit ea21c5422a9c137e3185f6dcace9376e0c8c7ad0
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Thu Mar 16 11:45:13 2017 -0600
+
+    Creating card, cardtype, and solution
+
+commit 0a16d3e6e848813e165101c7c8b1ff358826f108
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Thu Mar 16 11:32:03 2017 -0600
+
+    Creating player class and setUp tests
+
+commit 4861ccf18e91e1574caa35af4e3465dd4fe63243
+Author: Brandon Shevela <bshevela@mines.edu>
+Date:   Tue Mar 14 11:47:23 2017 -0600
+
+    Another commit
+
+commit 0c759b9a18f449504d1b61095ac723ee22c8702b
+Author: Brandon Shevela <bshevela@mines.edu>
+Date:   Tue Mar 14 11:46:10 2017 -0600
+
+    First commit of the new code
+
+commit c3747a0f523a50a410fbb49ee734e0f300a52bd7
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Mar 6 14:09:26 2017 -0700
+
+    Board 1 - 4, BadConfig Exception not working
+
+commit 020741cfe62cb9642c7267b402a6256d5430ddd4
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Mar 6 14:00:20 2017 -0700
+
+    New Stuff
+
+commit 1952b2396b8efa18089e43bb4636ae8c605a9659
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Wed Mar 1 16:03:00 2017 -0700
+
+    Failing Test Part I
+
+commit abe75d994d1b8a3dd606ed4e8f0b9753f0a9a5cd
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Feb 27 21:09:43 2017 -0700
+
+    Final solutiongit status!
+
+commit 1394369e45ba6a4bf1bef0aa25087f4374860a6e
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Feb 27 15:47:49 2017 -0700
+
+    Our solution, but with errors, bc test are still failing
+
+commit 1d1576c928a567f337042d9ee641f0f4ceaaee2d
+Author: Kevin May <kemay@mines.edu>
+Date:   Mon Feb 27 14:37:04 2017 -0700
+
+    trying to implement calcAdjencies
+
+commit 88148b5d936b9f3c2c7383505be2371894a031c0
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Mon Feb 27 12:20:23 2017 -0700
+
+    The if statements for the cells at the edges of the board
+
+commit 7f2053b16973c031cd44ec505506188444051ea4
+Author: ngrotz <ngrotz@mines.edu>
+Date:   Sat Feb 25 12:07:49 2017 -0700
+
+    The clue path PartI

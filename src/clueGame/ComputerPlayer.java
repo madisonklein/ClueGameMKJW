@@ -5,6 +5,10 @@ import java.util.Set;
 
 public class ComputerPlayer extends Player{
 
+	public ComputerPlayer() {
+		super("test", 0, 0, Color.red);
+	}
+	
 	public ComputerPlayer(String playerName, int row, int column, Color color) {
 		super(playerName, row, column, color);
 

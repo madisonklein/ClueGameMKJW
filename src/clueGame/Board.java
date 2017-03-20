@@ -202,6 +202,7 @@ public class Board {
 	}
 	
 	public void calcTargets(int row, int col,int pathLength){
+		targets.clear();
 		visitedList.add(board[row][col]);
 		findAllTargets(row, col, pathLength);
 	}
@@ -332,12 +333,7 @@ public class Board {
 	}
 	
 	public Set<BoardCell> getTargets(){
-		Set<BoardCell> temp = new HashSet<BoardCell>();
-		for(BoardCell a: targets){
-			temp.add(a);
-		}
-		targets.clear();
-		return temp;
+		return targets;
 	}
 	
 	public Set<BoardCell> getAdjList(int row, int col){

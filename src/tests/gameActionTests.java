@@ -3,11 +3,13 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.ComputerPlayer;
 import clueGame.BoardCell;
@@ -17,7 +19,7 @@ public class gameActionTests {
 	private static Board board;
 	
 	@Before
-	public void setUpClass() {
+	public void setUpClass() throws BadConfigFormatException, IOException{
 		board = Board.getInstance();
 		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");
 		// board.initalize() loads config files, creates the deck, and deals the cards

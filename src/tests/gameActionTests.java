@@ -14,6 +14,7 @@ import org.junit.Test;
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 import clueGame.BoardCell;
@@ -155,6 +156,48 @@ public class gameActionTests {
 		}
 		assertTrue(showRader);
 		assertTrue(showKnife);
+	}
+	
+	@Test
+	public void testHandleSuggestion() {
+		HumanPlayer human = new HumanPlayer();
+		ArrayList<ComputerPlayer> computerPlayers = new ArrayList<ComputerPlayer>();
+		Card kevin = new Card("Kevin", CardType.PERSON);
+		Card dungeon = new Card("Dungeon", CardType.ROOM);
+		Card rifle = new Card("Rifle", CardType.WEAPON);
+		ArrayList<Card> hand = new ArrayList<Card>();
+		hand.add(kevin);
+		for (int i = 0; i < 2; i++) {
+			computerPlayers.add(new ComputerPlayer());
+			computerPlayers.get(i).setHand(hand);
+		}
+		
+		
+		Card cardShown = board.handleSuggestion(new Solution("Niki", "Dungeon", "Brass Knuckles"), human, computerPlayers, 0);
+		assertEquals(cardShown, null);
+		
+		hand.add(dungeon);
+		computerPlayers.get(0).setHand(hand);
+		cardShown = board.handleSuggestion(new Solution("Niki", "Dungeon", "Brass Knuckles"), human, computerPlayers, 0);
+		assertEquals(cardShown, null);
+		
+		hand.add(rifle);
+		human.setHand(hand);
+		cardShown = board.handleSuggestion(new Solution("Niki", "Bar", "Rifle"),  human, computerPlayers, 0);
+		assertEquals(cardShown, rifle);
+		
+		cardShown = board.handleSuggestion(new Solution("Niki", "Bar", "Rifle"),  human, computerPlayers, -1);
+		assertEquals(cardShown, null);
+		
+		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Rifle"),  human, computerPlayers, -1);
+		assertEquals(cardShown, dungeon);
+		
+		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Rifle"),  human, computerPlayers, 0);
+		assertEquals(cardShown, kevin);
+		
+		
+		
+		
 	}
 
 }

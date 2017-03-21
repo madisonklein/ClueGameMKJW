@@ -546,5 +546,9 @@ public class Board {
 		return solution.equals(sol);
 		
 	}
+	public Card handleSuggestion(Solution sol, HumanPlayer human, ArrayList<ComputerPlayer> hand, int index) {
+		return null;
+		
+	}
 }
 	

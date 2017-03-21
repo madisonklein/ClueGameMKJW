@@ -1,53 +1,69 @@
-We used Pair programming for the whole thing!
+commit 522481e5de9211574dfb19b6feea3f449080641e
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Mar 20 22:25:43 2017 -0600
 
+    Adding comments to tests
 
-commit c3747a0f523a50a410fbb49ee734e0f300a52bd7
-Author: ngrotz <ngrotz@mines.edu>
-Date:   Mon Mar 6 14:09:26 2017 -0700
+commit cb392bf4099bc1763223b75d8249efb1d6d430f7
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Mar 20 22:13:29 2017 -0600
 
-    Board 1 - 4, BadConfig Exception not working
+    Made Handle Suggestion Tests Pass
 
-commit 020741cfe62cb9642c7267b402a6256d5430ddd4
-Author: ngrotz <ngrotz@mines.edu>
-Date:   Mon Mar 6 14:00:20 2017 -0700
+commit bbabcf42c9d1324f5c59d2300023dd7189e4e76f
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Mar 20 21:59:27 2017 -0600
 
-    New Stuff
+    Handle Suggestion Test Compiler fail
 
-commit 1952b2396b8efa18089e43bb4636ae8c605a9659
-Author: ngrotz <ngrotz@mines.edu>
-Date:   Wed Mar 1 16:03:00 2017 -0700
+commit be621239db1b3751856250d42ee3ebb0b1e8a877
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Mar 20 21:20:41 2017 -0600
 
-    Failing Test Part I
+    disprovingSuggestion test passes
 
-commit abe75d994d1b8a3dd606ed4e8f0b9753f0a9a5cd
-Author: ngrotz <ngrotz@mines.edu>
-Date:   Mon Feb 27 21:09:43 2017 -0700
+commit 102133ac784bc875df49cc5cd473fee742f26e1c
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Mar 20 21:05:52 2017 -0600
 
-    Final solutiongit status!
+    Created disprove suggestion tests that compile but fail
 
-commit 1394369e45ba6a4bf1bef0aa25087f4374860a6e
-Author: ngrotz <ngrotz@mines.edu>
-Date:   Mon Feb 27 15:47:49 2017 -0700
+commit 2112d06e9ac0cb1920cc027bb6d70c6900b1b299
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Mar 20 20:55:11 2017 -0600
 
-    Our solution, but with errors, bc test are still failing
+    createSuggestion test pass
 
-commit 1d1576c928a567f337042d9ee641f0f4ceaaee2d
-Author: Kevin May <kemay@mines.edu>
-Date:   Mon Feb 27 14:37:04 2017 -0700
+commit dbf83b80fa389c002884f589688278a233fc6728
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Mar 20 20:48:47 2017 -0600
 
-    trying to implement calcAdjencies
+    Added suggestion tests that compile but fail
 
-commit 88148b5d936b9f3c2c7383505be2371894a031c0
-Author: ngrotz <ngrotz@mines.edu>
-Date:   Mon Feb 27 12:20:23 2017 -0700
+commit 0066c53b3d5efb0908944839efeca130aa033e87
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Sun Mar 19 21:41:17 2017 -0600
 
-    The if statements for the cells at the edges of the board
+    Made Accusation tests pass
 
-commit 7f2053b16973c031cd44ec505506188444051ea4
-Author: ngrotz <ngrotz@mines.edu>
-Date:   Sat Feb 25 12:07:49 2017 -0700
+commit 3cf744c542a3ea07c0b8ed8726aba859fd6059ca
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Sun Mar 19 21:40:18 2017 -0600
 
-    The clue path PartI
+    Accusation tests compile but fail
+
+commit f153a39e3ea38bf5d7d5886dec8fa746cd0a2bd8
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Sun Mar 19 21:18:08 2017 -0600
+
+    Selecting targets tests pass
+
+commit 7361e6e2059bb23b0b18b523e5785ef4c96a4e53
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Sun Mar 19 21:02:35 2017 -0600
+
+    Selecting targets tests compile but fail
+
 commit bfdcb5487662a04c5e51a3b5ce3e6fd5826d99cd
 Author: Madison Klein <madisonklein@mines.edu>
 Date:   Thu Mar 16 22:12:46 2017 -0600

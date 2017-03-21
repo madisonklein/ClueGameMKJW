@@ -109,7 +109,7 @@ public class gameActionTests {
 		player.setUnseenWeapons(temp);
 		//randomChecks store booleans that will be set if certain rooms or weapons are picked
 		Boolean[] randomChecks = {false, false, false, false, false, false};
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 100; i++) {
 			player.createSuggestion("testRoom");
 			suggestion = player.getSuggestion();
 			if (suggestion.person.equals("test")) randomChecks[0] = true;

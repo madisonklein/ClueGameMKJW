@@ -44,9 +44,9 @@ public class ComputerPlayer extends Player{
 	}
 	
 	public void createSuggestion(String room) {
-		int peopleIndex = (int) Math.random()*unseenPeople.size();
-		int weaponIndex = (int) Math.random()*unseenWeapons.size();
-		suggestion = new Solution(unseenPeople.get(peopleIndex), unseenWeapons.get(weaponIndex), room);
+		int peopleIndex = (int) (Math.random()*unseenPeople.size());
+		int weaponIndex = (int) (Math.random()*unseenWeapons.size());
+		suggestion = new Solution(unseenPeople.get(peopleIndex), room, unseenWeapons.get(weaponIndex));
 	}
 	
 	public void clearVisitedRooms() {

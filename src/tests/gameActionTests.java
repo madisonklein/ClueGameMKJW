@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.Before;
@@ -89,6 +90,41 @@ public class gameActionTests {
 		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolean", "Bool")));
 		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolane", "Boolean")));
 		assertFalse(board.checkAccusation(new Solution("Boolean", "Boolean", "Boolean")));
+	}
+	@Test
+	public void testCreateSuggestion() {
+		ComputerPlayer player = new ComputerPlayer();
+		ArrayList<String> temp = new ArrayList<String>();
+		temp.add("test");
+		player.setUnseenPeople(temp);
+		player.setUnseenWeapons(temp);
+		player.createSuggestion("testRoom");
+		Solution suggestion = player.getSuggestion();
+		assertEquals("test", suggestion.person);
+		assertEquals("test", suggestion.weapon);
+		assertEquals("testRoom", suggestion.room);
+		temp.add("another");
+		temp.add("third");
+		player.setUnseenPeople(temp);
+		player.setUnseenWeapons(temp);
+		//randomChecks store booleans that will be set if certain rooms or weapons are picked
+		Boolean[] randomChecks = {false, false, false, false, false, false};
+		for (int i = 0; i < 50; i++) {
+			player.createSuggestion("testRoom");
+			suggestion = player.getSuggestion();
+			if (suggestion.person.equals("test")) randomChecks[0] = true;
+			else if (suggestion.person.equals("another")) randomChecks[1] = true;
+			else if (suggestion.person.equals("third")) randomChecks[2] = true;
+			
+			if (suggestion.weapon.equals("test")) randomChecks[3] = true;
+			else if (suggestion.weapon.equals("another")) randomChecks[4] = true;
+			else if (suggestion.weapon.equals("third")) randomChecks[5] = true;
+		}
+		
+		for (int i = 0; i < 6; i++) {
+			assertTrue(randomChecks[i]);
+		}
+		
 	}
 
 }

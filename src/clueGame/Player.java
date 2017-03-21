@@ -59,6 +59,14 @@ public class Player {
 			return false;
 		return true;
 	}
+	
+	public void setRow(int row) {
+		this.row = row;
+	}
+	
+	public void setColumn(int col) {
+		this.column = col;
+	}
 
 	 
 }

@@ -419,6 +419,18 @@ public class Board {
 				people.add(new ComputerPlayer(temp[0], Integer.parseInt(temp[1]), Integer.parseInt(temp[2]), convertColor(temp[3])));
 				line = br.readLine();
 			}
+			ArrayList<String> allWeapons = new ArrayList<String>();
+			for (String s : weapons) allWeapons.add(s);
+			ArrayList<String> allPeople = new ArrayList<String>();
+			for (ComputerPlayer p: people) allPeople.add(p.getName());
+			allPeople.add(human.getName());
+			ArrayList<String> allRooms = new ArrayList<String>();
+			for (Character c : legend.keySet()) allRooms.add(legend.get(c));
+			for (ComputerPlayer p: people) {
+				p.setUnseenWeapons(allWeapons);
+				p.setUnseenPeople(allPeople);
+				p.setUnseenRooms(allRooms);
+			}
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

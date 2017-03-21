@@ -142,12 +142,14 @@ public class gameActionTests {
 		hand.add(knife);
 		hand.add(ballroom);
 		player.setHand(hand);
-		Card shown = player.disproveSuggestion(new Solution("Dr. Rader", "candlestick", "attic"));
+		Card shown = player.disproveSuggestion(new Solution("Unknown", "attic", "candlestick"));
+		assertEquals(shown, null);
+		shown = player.disproveSuggestion(new Solution("Dr. Rader", "attic", "candlestick"));
 		assertEquals(shown, rader);
 		boolean showRader = false;
 		boolean showKnife = false;
 		for (int i = 0; i < 50; i ++) {
-			shown = player.disproveSuggestion(new Solution("Dr. Rader", "knife", "ballroom"));
+			shown = player.disproveSuggestion(new Solution("Dr. Rader", "ballroom", "knife"));
 			if (shown.equals(rader)) showRader = true;
 			else if (shown.equals(knife)) showKnife = true;
 		}

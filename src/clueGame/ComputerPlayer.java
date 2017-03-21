@@ -9,7 +9,7 @@ public class ComputerPlayer extends Player{
 	private ArrayList<BoardCell> visitedRooms;
 	private Solution suggestion;
 	private ArrayList<String> unseenWeapons, unseenPeople, unseenRooms;
-	private ArrayList<String> hand;
+	
 	
 	public ComputerPlayer() {
 		super("test", 0, 0, Color.red);
@@ -63,11 +63,6 @@ public class ComputerPlayer extends Player{
 	
 	public void setUnseenRooms(ArrayList<String> rooms) {
 		this.unseenRooms = rooms;
-	}
-	
-	public void setHand(ArrayList<Card> hand) {
-		this.hand = new ArrayList<String>();
-		for (Card c : hand) this.hand.add(c.getCardName());
 	}
 	
 	public Solution getSuggestion() {

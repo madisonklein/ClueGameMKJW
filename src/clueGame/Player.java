@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class Player {
 	
@@ -8,6 +9,7 @@ public class Player {
 	private int row;
 	private int column;
 	private Color color;
+	private ArrayList<String> hand;
 	
 	public Player(String playerName, int row, int column, Color color) {
 		this.playerName = playerName;
@@ -17,7 +19,21 @@ public class Player {
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {
-		return new Card("name", CardType.PERSON);
+		Card person = new Card(suggestion.person, CardType.PERSON);
+		Card weapon = new Card(suggestion.weapon, CardType.WEAPON);
+		Card room = new Card(suggestion.room, CardType.ROOM);
+		ArrayList<Card> matches = new ArrayList<Card>();
+		if (hand.contains(person.getCardName())) matches.add(person);
+		if (hand.contains(weapon.getCardName())) matches.add(weapon);
+		if (hand.contains(room.getCardName())) matches.add(room);
+		
+		if (matches.size() == 0) return null;
+		else if (matches.size() == 1) return matches.get(0);
+		else {
+			int index = (int) (Math.random()*matches.size());
+			return matches.get(index);
+		}
+		
 	}
 	 public String getName() {
 		 return playerName;
@@ -66,6 +82,15 @@ public class Player {
 	
 	public void setColumn(int col) {
 		this.column = col;
+	}
+	
+	public ArrayList<String> getHand() {
+		return hand;
+	}
+	
+	public void setHand(ArrayList<Card> hand) {
+		this.hand = new ArrayList<String>();
+		for (Card c : hand) this.hand.add(c.getCardName());
 	}
 
 	 

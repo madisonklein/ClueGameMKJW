@@ -165,12 +165,14 @@ public class gameActionTests {
 		Card kevin = new Card("Kevin", CardType.PERSON);
 		Card dungeon = new Card("Dungeon", CardType.ROOM);
 		Card rifle = new Card("Rifle", CardType.WEAPON);
+		Card knife = new Card("Knife", CardType.WEAPON);
 		ArrayList<Card> hand = new ArrayList<Card>();
 		hand.add(kevin);
 		for (int i = 0; i < 2; i++) {
 			computerPlayers.add(new ComputerPlayer());
 			computerPlayers.get(i).setHand(hand);
 		}
+		human.setHand(hand);
 		
 		
 		Card cardShown = board.handleSuggestion(new Solution("Niki", "Dungeon", "Brass Knuckles"), human, computerPlayers, 0);
@@ -189,10 +191,12 @@ public class gameActionTests {
 		cardShown = board.handleSuggestion(new Solution("Niki", "Bar", "Rifle"),  human, computerPlayers, -1);
 		assertEquals(cardShown, null);
 		
-		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Rifle"),  human, computerPlayers, -1);
+		hand.add(knife);
+		computerPlayers.get(1).setHand(hand);
+		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Knife"),  human, computerPlayers, -1);
 		assertEquals(cardShown, dungeon);
 		
-		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Rifle"),  human, computerPlayers, 0);
+		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Rifle"),  human, computerPlayers, 1);
 		assertEquals(cardShown, kevin);
 		
 		

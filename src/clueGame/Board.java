@@ -546,9 +546,22 @@ public class Board {
 		return solution.equals(sol);
 		
 	}
-	public Card handleSuggestion(Solution sol, HumanPlayer human, ArrayList<ComputerPlayer> hand, int index) {
+	public Card handleSuggestion(Solution sol, HumanPlayer human, ArrayList<ComputerPlayer> computerPlayers, int index) {
+		int temp = index + 1;
+		if (temp > computerPlayers.size() - 1) temp = -1;
+		for (int i = temp; i < computerPlayers.size(); i++) {
+			Card shownCard;
+			if (i == -1) shownCard = human.disproveSuggestion(sol);
+			else shownCard = computerPlayers.get(i).disproveSuggestion(sol);
+			if (shownCard != null) return shownCard;
+		}
+		for (int i = -1; i < temp - 1; i++) {
+			Card shownCard;
+			if (i == -1) shownCard = human.disproveSuggestion(sol);
+			else shownCard = computerPlayers.get(i).disproveSuggestion(sol);
+			if (shownCard != null) return shownCard;
+		}
 		return null;
-		
 	}
 }
 	

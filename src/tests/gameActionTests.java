@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Before;
@@ -13,8 +14,11 @@ import org.junit.Test;
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.ComputerPlayer;
+import clueGame.Player;
 import clueGame.Solution;
 import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.CardType;
 
 public class gameActionTests {
 
@@ -125,6 +129,30 @@ public class gameActionTests {
 			assertTrue(randomChecks[i]);
 		}
 		
+	}
+	
+	@Test
+	public void testDisproveSuggestion() {
+		ComputerPlayer player = new ComputerPlayer();
+		Card rader = new Card("Dr. Rader", CardType.PERSON);
+		Card knife = new Card("knife", CardType.WEAPON);
+		Card ballroom = new Card("ballroom", CardType.ROOM);
+		ArrayList<Card> hand = new ArrayList<Card>();
+		hand.add(rader);
+		hand.add(knife);
+		hand.add(ballroom);
+		player.setHand(hand);
+		Card shown = player.disproveSuggestion(new Solution("Dr. Rader", "candlestick", "attic"));
+		assertEquals(shown, rader);
+		boolean showRader = false;
+		boolean showKnife = false;
+		for (int i = 0; i < 50; i ++) {
+			shown = player.disproveSuggestion(new Solution("Dr. Rader", "knife", "ballroom"));
+			if (shown.equals(rader)) showRader = true;
+			else if (shown.equals(knife)) showKnife = true;
+		}
+		assertTrue(showRader);
+		assertTrue(showKnife);
 	}
 
 }

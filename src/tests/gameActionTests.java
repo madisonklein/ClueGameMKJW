@@ -33,6 +33,7 @@ public class gameActionTests {
 		board.initialize();
 	}
 	
+	
 	@Test
 	public void testTargetRandomSelection() {
 		ComputerPlayer player = new ComputerPlayer();
@@ -89,13 +90,18 @@ public class gameActionTests {
 	@Test
 	public void testAccusation() {
 		board.setSolution(new Solution("Boolena", "Boolane", "Bool"));
-	
+		//test solution is correct
 		assertTrue(board.checkAccusation(new Solution("Boolena", "Boolane", "Bool")));
+		//test solution with wrong person
 		assertFalse(board.checkAccusation(new Solution("Boolean", "Boolane", "Bool")));
+		//test solution with wrong weapon
 		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolean", "Bool")));
+		//test solution with wrong room
 		assertFalse(board.checkAccusation(new Solution("Boolena", "Boolane", "Boolean")));
+		// test completely incorrect solution
 		assertFalse(board.checkAccusation(new Solution("Boolean", "Boolean", "Boolean")));
 	}
+	
 	@Test
 	public void testCreateSuggestion() {
 		ComputerPlayer player = new ComputerPlayer();
@@ -105,6 +111,7 @@ public class gameActionTests {
 		player.setUnseenWeapons(temp);
 		player.createSuggestion("testRoom");
 		Solution suggestion = player.getSuggestion();
+		//test solution matches room and only weapon/person unseen
 		assertEquals("test", suggestion.person);
 		assertEquals("test", suggestion.weapon);
 		assertEquals("testRoom", suggestion.room);
@@ -126,6 +133,7 @@ public class gameActionTests {
 			else if (suggestion.weapon.equals("third")) randomChecks[5] = true;
 		}
 		
+		//test random selection when multiple weapons/people unseen
 		for (int i = 0; i < 6; i++) {
 			assertTrue(randomChecks[i]);
 		}
@@ -144,8 +152,10 @@ public class gameActionTests {
 		hand.add(ballroom);
 		player.setHand(hand);
 		Card shown = player.disproveSuggestion(new Solution("Unknown", "attic", "candlestick"));
+		//tests null is returned when no matching cards
 		assertEquals(shown, null);
 		shown = player.disproveSuggestion(new Solution("Dr. Rader", "attic", "candlestick"));
+		//tests card is returned when only have one matching card
 		assertEquals(shown, rader);
 		boolean showRader = false;
 		boolean showKnife = false;
@@ -154,6 +164,7 @@ public class gameActionTests {
 			if (shown.equals(rader)) showRader = true;
 			else if (shown.equals(knife)) showKnife = true;
 		}
+		//tests card is randomly selected when have multiple matching cards
 		assertTrue(showRader);
 		assertTrue(showKnife);
 	}
@@ -174,28 +185,33 @@ public class gameActionTests {
 		}
 		human.setHand(hand);
 		
-		
+		//tests null when no one can disprove
 		Card cardShown = board.handleSuggestion(new Solution("Niki", "Dungeon", "Brass Knuckles"), human, computerPlayers, 0);
 		assertEquals(cardShown, null);
 		
+		//tests null when only accusing player can disprove
 		hand.add(dungeon);
 		computerPlayers.get(0).setHand(hand);
 		cardShown = board.handleSuggestion(new Solution("Niki", "Dungeon", "Brass Knuckles"), human, computerPlayers, 0);
 		assertEquals(cardShown, null);
 		
+		//tests card when only human can disprove
 		hand.add(rifle);
 		human.setHand(hand);
 		cardShown = board.handleSuggestion(new Solution("Niki", "Bar", "Rifle"),  human, computerPlayers, 0);
 		assertEquals(cardShown, rifle);
 		
+		//test null when only human can disprove but human is accuser
 		cardShown = board.handleSuggestion(new Solution("Niki", "Bar", "Rifle"),  human, computerPlayers, -1);
 		assertEquals(cardShown, null);
 		
+		//test first players card when two players can disprove
 		hand.add(knife);
 		computerPlayers.get(1).setHand(hand);
 		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Knife"),  human, computerPlayers, -1);
 		assertEquals(cardShown, dungeon);
 		
+		//test humans card when human and other player can disprove but human comes first
 		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Rifle"),  human, computerPlayers, 1);
 		assertEquals(cardShown, kevin);
 		

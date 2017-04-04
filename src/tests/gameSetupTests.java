@@ -38,8 +38,11 @@ public class gameSetupTests {
 		ArrayList<ComputerPlayer> people = board.getPeople();
 		assertEquals(people.size() + 1, NUM_PEOPLE);
 		HumanPlayer human = board.getHumanPlayer();
+		//Checking that human player is first player read in from people file
 		assertTrue(human.equals(new HumanPlayer("Dr. Rader", 10, 0, Color.blue)));
+		// Checking that first computer player is second player read in from people file
 		assertTrue(people.get(0).equals(new ComputerPlayer("Kevin", 19, 6, Color.red)));
+		// Checking that last computer player is last player read in from people file
 		assertTrue(people.get(people.size()-1).equals(new ComputerPlayer("Bill Murray", 6, 10, Color.magenta)));
 		
 	}
@@ -55,9 +58,11 @@ public class gameSetupTests {
 			if (c.getCardType() == CardType.ROOM) rooms++;
 			if (c.getCardType() == CardType.WEAPON) weapons++;
 		}
+		//check that deck contains correct number of people, weapons, and rooms
 		assertEquals(people, NUM_PEOPLE);
 		assertEquals(weapons, NUM_WEAPONS);
 		assertEquals(rooms, NUM_ROOMS);
+		// check that deck contains certain expected cards
 		assertTrue(deck.contains(new Card("Dr. Rader", CardType.PERSON)));
 		assertTrue(deck.contains(new Card("knife", CardType.WEAPON)));
 		assertTrue(deck.contains(new Card("Dungeon", CardType.ROOM)));
@@ -66,6 +71,7 @@ public class gameSetupTests {
 	@Test
 	public void testDealCard() {
 		Map<Player, ArrayList<Card>> hands = board.getHands();
+		// check that number of hands matches number of players
 		assertEquals(hands.keySet().size(), NUM_PEOPLE);
 		Set<Card> uniqueCards = new HashSet<Card>();
 		for (Player p : hands.keySet()) {
@@ -75,6 +81,7 @@ public class gameSetupTests {
 				uniqueCards.add(c);
 			}
 		}
+		//test that all people are dealt unique cards
 		assertEquals(uniqueCards.size(), DECK_SIZE);
 	}
 

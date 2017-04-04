@@ -65,14 +65,9 @@ public class Board {
     
 
 	    while (line != null) {
-	    	int countCol = 1;
 	        sb.append(line);
 	        sb.append(",");
    
-	        for(int i = 0; i < line.length(); i++){
-	        	if(line.charAt(i) == ',') countCol++;
-	        }
-	        
 	        line = br.readLine();
 	        counterRow++;
 

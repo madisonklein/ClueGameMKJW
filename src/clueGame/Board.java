@@ -189,6 +189,7 @@ public class Board {
 	}
 	
 	public boolean isAdj(int row, int col, int a, int b){
+		//Checking for out of bounds/ if boardcell is at edge of board
 		if (row+a < 0 || row + a >= numRows || col+b < 0 || col+b >= numCols) return false;
 		if((board[row][col].isRoom()) || (board[row+a][col+b].isRoom())){
 			return false;

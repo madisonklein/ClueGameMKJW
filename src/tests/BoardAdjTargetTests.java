@@ -29,15 +29,7 @@ public class BoardAdjTargetTests {
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegend.txt", "People.txt");		
-			try {
-				board.initialize();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (BadConfigFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		board.initialize();
 		
 	}
 

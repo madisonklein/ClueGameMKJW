@@ -46,14 +46,15 @@ public class Board {
 		private static Board theInstance = new Board();
 	
 	
-		public void initialize() throws IOException, BadConfigFormatException {
+		public void initialize() {
 		
 		legend = new HashMap<Character, String>();
 		//READING IN THE FILES AND COUNTING ROWS AND COLUMNS
 		int counterRow = 0;
         int counterCol = 1;
         
-		String layout;
+		try {
+        String layout;
 		BufferedReader br = new BufferedReader(new FileReader(boardConfigFile));
         
 	    StringBuilder sb = new StringBuilder();
@@ -142,6 +143,10 @@ public class Board {
 		loadPeople();
 		createDeck();
 		dealHands();
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	//CALCADJACENCIES AND CALCTARGETS

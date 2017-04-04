@@ -58,4 +58,16 @@ Before:
 	}
 	
 	After:
-	
+	//CALCADJACENCIES AND CALCTARGETS
+	public void calcAdjacencies(){
+		for(int row = 0; row < numRows; row++){
+			for(int col = 0; col < numCols; col++){
+			Set<BoardCell> temp = new HashSet<BoardCell>();
+			if (isAdj(row, col, -1, 0)) temp.add(board[row-1][col]);
+			if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
+			if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);
+			if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);
+			adjacencyMap.put(getCellAt(row, col), temp);
+			}
+		}
+	}

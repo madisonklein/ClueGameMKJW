@@ -21,14 +21,7 @@ public class AdjacenciesTargetTest {
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");		
-		try {
-			board.initialize();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		} catch (BadConfigFormatException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
+		board.initialize();
 	}
 	
 	@Test

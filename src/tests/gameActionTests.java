@@ -208,11 +208,12 @@ public class gameActionTests {
 		//test first players card when two players can disprove
 		hand.add(knife);
 		computerPlayers.get(1).setHand(hand);
-		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Knife"),  human, computerPlayers, -1);
+		cardShown = board.handleSuggestion(new Solution("Brandon", "Dungeon", "Knife"),  human, computerPlayers, -1);
+		
 		assertEquals(cardShown, dungeon);
 		
 		//test humans card when human and other player can disprove but human comes first
-		cardShown = board.handleSuggestion(new Solution("Kevin", "Dungeon", "Rifle"),  human, computerPlayers, 1);
+		cardShown = board.handleSuggestion(new Solution("Kevin", "Kitchen", "Candlestick"),  human, computerPlayers, 1);
 		assertEquals(cardShown, kevin);
 		
 		

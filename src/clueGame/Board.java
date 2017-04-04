@@ -150,50 +150,42 @@ public class Board {
 			for(int col = 0; col < numCols; col++){
 			Set<BoardCell> temp = new HashSet<BoardCell>();
 			if((row > 0) && (row < numRows - 1)){
-			if((col > 0) && (col < numCols - 1)){
 				if(isAdj(row, col, -1, 0)) temp.add(board[row - 1][col]);
 				if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
-				if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);
-				if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);
+				if((col > 0) && (col < numCols - 1)){
+					if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);
+					if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);
+					}
+				else if(col == 0){
+					if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);	
 				}
-			else if(col == 0){
-				if(isAdj(row, col, -1, 0)) temp.add(board[row - 1][col]);
-				if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
-				if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);	
-			}
-			else if(col == numCols - 1){
-				if(isAdj(row, col, -1, 0)) temp.add(board[row - 1][col]);
-				if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
-				if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);
-				}
+				else if(col == numCols - 1){
+					if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);
+					}
 			}
 			else if(row == 0){
+				if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
 				if((col > 0) && (col < numCols - 1)){
-					if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
 					if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);
 					if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);	
 				}
 				else if(col == 0){
-					if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
 					if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);	
 				}
 				else if(col == numCols - 1){
-					if(isAdj(row, col, 1, 0)) temp.add(board[row + 1][col]);
 					if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);	
 				}
 			}
 			else if(row == numRows - 1){
+				if(isAdj(row, col, -1, 0)) temp.add(board[row - 1][col]);
 				if((col > 0) && (col < numCols - 1)){
-					if(isAdj(row, col, -1, 0)) temp.add(board[row - 1][col]);
 					if(isAdj(row, col, 0, -1)) temp.add(board[row][col - 1]);
 					if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);
 				}
 				if(col == 0){
-					if(isAdj(row, col, -1, 0)) temp.add(board[row - 1][col]);
 					if(isAdj(row, col, 0, 1)) temp.add(board[row][col + 1]);	
 					}
 				if(col == numCols - 1){
-					if(isAdj(row, col, -1, 0)) temp.add(board[row - 1][col]);
 					if(isAdj(row, col, 0, -1)) temp.add(board[row][col- 1]);
 					}
 				}

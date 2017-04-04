@@ -49,88 +49,10 @@ public class Board {
 		public void initialize() {
 		
 		legend = new HashMap<Character, String>();
-		//READING IN THE FILES AND COUNTING ROWS AND COLUMNS
-		int counterRow = 0;
-        int counterCol = 1;
+		//READING IN THE FILES AND COUNTING ROWS AND COLUMN
         
 		try {
-        String layout;
-		BufferedReader br = new BufferedReader(new FileReader(boardConfigFile));
-        
-	    StringBuilder sb = new StringBuilder();
-	    String line = br.readLine();
-        for(int i = 0; i < line.length(); i++){
-          	if(line.charAt(i) == ',') counterCol++;
-        }
-    
-
-	    while (line != null) {
-	        sb.append(line);
-	        sb.append(",");
-   
-	        line = br.readLine();
-	        counterRow++;
-
-	    }
-
-		layout = sb.toString();
-        
-	    br.close();
-		
-	    
-	    //INITIALIZING THE BOARD
-	    setNumRows(counterRow);
-	    setNumCols(counterCol);
-	    board = new BoardCell[numRows][numCols];
-		for (int i = 0; i < numRows; i++){
-			for (int j = 0; j < numCols; j++){
-				board[i][j] = new BoardCell(i,j);
-			}
-		}
-	    int col = 0;
-	    int row = 0;
-	    	    
-	    //INITIALIZING THE BOARD LAYOUT
-	    for (String splitting: layout.split(",")) {
-	         if (col < numCols){
-	        	 if(splitting.length() > 1){
-	        		if((splitting.charAt(1) == 'D')) board[row][col].setDoorDirection(DoorDirection.DOWN);
-	        		if((splitting.charAt(1) == 'U')) board[row][col].setDoorDirection(DoorDirection.UP);
-	        		if((splitting.charAt(1) == 'L')) board[row][col].setDoorDirection(DoorDirection.LEFT);
-	        		if((splitting.charAt(1) == 'R')) board[row][col].setDoorDirection(DoorDirection.RIGHT);
-	        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NONE);
-	        	 }
-	        	 	else{
-	        	 		board[row][col].setDoorDirection(DoorDirection.NONE); 
-	        	 	}
-
-	        	 board[row][col].setRoomInitial(splitting.charAt(0));
-	        	 col++;
-	         }
-	         else{
-	        	 col = 0;
-	        	 row += 1;
-	        	 if(splitting.length() > 1){
-		        		if((splitting.charAt(1) == 'D')) board[row][col].setDoorDirection(DoorDirection.DOWN);
-		        		if((splitting.charAt(1) == 'U')) board[row][col].setDoorDirection(DoorDirection.UP);
-		        		if((splitting.charAt(1) == 'L')) board[row][col].setDoorDirection(DoorDirection.LEFT);
-		        		if((splitting.charAt(1) == 'R')) board[row][col].setDoorDirection(DoorDirection.RIGHT);
-		        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NONE);
-		        	 }
-		        else{
-		       		 board[row][col].setDoorDirection(DoorDirection.NONE); 
-		       	 }
-	        	 board[row][col].setRoomInitial(splitting.charAt(0));
-	        	 col += 1;
-	         }
-	      }
-	
-	    
-	    //The code above is in the loadBoardConfig() but it gives us an error when we replace the code above with the function call below
-	    
-//		loadBoardConfig();
-
-	    
+		loadBoardConfig();
 		loadRoomConfig();	
 	    
 		calcAdjacencies();
@@ -407,95 +329,79 @@ public class Board {
 		return color;
 	}
 	
-	public void loadBoardConfig() throws BadConfigFormatException{
+	public void loadBoardConfig() throws BadConfigFormatException, IOException, FileNotFoundException{
 		int counterRow = 0;
         int counterCol = 1;
-        
-		String layout = null;
-		try{BufferedReader br = new BufferedReader(new FileReader(boardConfigFile));
-        
-	    StringBuilder sb = new StringBuilder();
-	    String line = br.readLine();
-        for(int i = 0; i < line.length(); i++){
-          	if(line.charAt(i) == ',') counterCol++;
-        }
-    
-
-	    while (line != null) {
-	    	int countCol = 1;
-	        sb.append(line);
-	        sb.append(",");
-
+		String layout;
+			BufferedReader br = new BufferedReader(new FileReader(boardConfigFile));
 	        
+		    StringBuilder sb = new StringBuilder();
+		    String line = br.readLine();
 	        for(int i = 0; i < line.length(); i++){
-	        	if(line.charAt(i) == ',') countCol++;
+	          	if(line.charAt(i) == ',') counterCol++;
 	        }
-
-	        if (countCol != counterCol){
-	        	
-	          	throw new BadConfigFormatException("Not same number of columns in each row");
-	        }
-	        
-	        line = br.readLine();
-	        counterRow++;
-
-	    }
-
-		layout = sb.toString();
-        
-	    br.close();
-		}catch(IOException e){
-			System.out.println(e.getMessage());
-		}
-		
-		
 	    
-	    //INITIALIZING THE BOARD
-	    setNumRows(counterRow);
-	    setNumCols(counterCol);
-	    board = new BoardCell[numRows][numCols];
-		for (int i = 0; i < numRows; i++){
-			for (int j = 0; j < numCols; j++){
-				board[i][j] = new BoardCell(i,j);
-			}
-		}
-	    int col = 0;
-	    int row = 0;
-	    	    
-	    //INITIALIZING THE BOARD LAYOUT
-	    for (String splitting: layout.split(",")) {
-	         if (col < numCols){
-	        	 if(splitting.length() > 1){
-	        		if((splitting.charAt(1) == 'D')) board[row][col].setDoorDirection(DoorDirection.DOWN);
-	        		if((splitting.charAt(1) == 'U')) board[row][col].setDoorDirection(DoorDirection.UP);
-	        		if((splitting.charAt(1) == 'L')) board[row][col].setDoorDirection(DoorDirection.LEFT);
-	        		if((splitting.charAt(1) == 'R')) board[row][col].setDoorDirection(DoorDirection.RIGHT);
-	        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NONE);
-	        	 }
-	        	 	else{
-	        	 		throw new BadConfigFormatException("Doors are wrong");
-	        	 	}
 
-	        	 board[row][col].setRoomInitial(splitting.charAt(0));
-	        	 col++;
-	         }
-	         else{
-	        	 col = 0;
-	        	 row += 1;
-	        	 if(splitting.length() > 1){
+		    while (line != null) {
+		        sb.append(line);
+		        sb.append(",");
+	   
+		        line = br.readLine();
+		        counterRow++;
+
+		    }
+
+			layout = sb.toString();
+	        
+		    br.close();
+			
+		    
+		    //INITIALIZING THE BOARD
+		    setNumRows(counterRow);
+		    setNumCols(counterCol);
+		    board = new BoardCell[numRows][numCols];
+			for (int i = 0; i < numRows; i++){
+				for (int j = 0; j < numCols; j++){
+					board[i][j] = new BoardCell(i,j);
+				}
+			}
+		    int col = 0;
+		    int row = 0;
+		    	    
+		    //INITIALIZING THE BOARD LAYOUT
+		    for (String splitting: layout.split(",")) {
+		         if (col < numCols){
+		        	 if(splitting.length() > 1){
 		        		if((splitting.charAt(1) == 'D')) board[row][col].setDoorDirection(DoorDirection.DOWN);
 		        		if((splitting.charAt(1) == 'U')) board[row][col].setDoorDirection(DoorDirection.UP);
 		        		if((splitting.charAt(1) == 'L')) board[row][col].setDoorDirection(DoorDirection.LEFT);
 		        		if((splitting.charAt(1) == 'R')) board[row][col].setDoorDirection(DoorDirection.RIGHT);
 		        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NONE);
 		        	 }
-		        else{
-		       		 board[row][col].setDoorDirection(DoorDirection.NONE); 
-		       	 }
-	        	 board[row][col].setRoomInitial(splitting.charAt(0));
-	        	 col += 1;
-	         }
-	      }
+		        	 	else{
+		        	 		board[row][col].setDoorDirection(DoorDirection.NONE); 
+		        	 	}
+
+		        	 board[row][col].setRoomInitial(splitting.charAt(0));
+		        	 col++;
+		         }
+		         else{
+		        	 col = 0;
+		        	 row += 1;
+		        	 if(splitting.length() > 1){
+			        		if((splitting.charAt(1) == 'D')) board[row][col].setDoorDirection(DoorDirection.DOWN);
+			        		if((splitting.charAt(1) == 'U')) board[row][col].setDoorDirection(DoorDirection.UP);
+			        		if((splitting.charAt(1) == 'L')) board[row][col].setDoorDirection(DoorDirection.LEFT);
+			        		if((splitting.charAt(1) == 'R')) board[row][col].setDoorDirection(DoorDirection.RIGHT);
+			        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NONE);
+			        	 }
+			        else{
+			       		 board[row][col].setDoorDirection(DoorDirection.NONE); 
+			       	 }
+		        	 board[row][col].setRoomInitial(splitting.charAt(0));
+		        	 col += 1;
+		         }
+		      }
 		
 	}
 	//Solution Test Methods

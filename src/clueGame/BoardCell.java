@@ -1,19 +1,53 @@
 package clueGame;
+import java.awt.Color;
+import java.awt.Graphics;
 
-public class BoardCell {
+import javax.swing.*;
+
+public class BoardCell extends JComponent {
 
 
 	//THE INSTANCE VARIABLES
 	private int row, column;
 	private char roomInitial;
 	private DoorDirection doorDirection;
-	
+	private static int CELL_HEIGHT = 25;
+	private static int CELL_WIDTH = 25;
 
 	//CONSTRUCTOR
 	public BoardCell(int row, int column) {
 		super();
 		this.row = row;
 		this.column = column;
+	}
+	
+	public void draw(Graphics g) {
+		if (this.isHallWay()) g.setColor(Color.yellow);
+		else g.setColor(Color.gray);
+//		else if (!this.isDoorway()) g.setColor(Color.gray);
+//		else g.setColor(Color.blue);
+		g.fillRect(column*CELL_WIDTH, row*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+		if (this.isHallWay()) {
+			g.setColor(Color.black);
+			g.drawRect(column*CELL_WIDTH, row*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+		}
+		else if (this.isDoorway()) {
+			g.setColor(Color.blue);
+			switch (doorDirection) {
+			case UP: 
+				g.fillRect(column*CELL_WIDTH, row*CELL_HEIGHT, CELL_WIDTH, 5);
+				break;
+			case DOWN:
+				g.fillRect(column*CELL_WIDTH, row*CELL_HEIGHT+20, CELL_WIDTH, 5);
+				break;
+			case RIGHT:
+				g.fillRect(column*CELL_WIDTH+20, row*CELL_HEIGHT, 5, CELL_HEIGHT);
+				break;
+			case LEFT:
+				g.fillRect(column*CELL_WIDTH, row*CELL_HEIGHT, 5, CELL_HEIGHT);
+				break;
+			}
+		}
 	}
 	
 	public void setRoomInitial(char roomInitial) {

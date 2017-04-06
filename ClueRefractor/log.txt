@@ -1,3 +1,57 @@
+commit cf58186e733539674ff43135550663ea5bafbf28
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 11:27:39 2017 -0600
+
+    making initalize call loadBoardConfig
+
+commit 22bd056f7b28e9207c2995d27a7f33a59f2073d7
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 11:18:35 2017 -0600
+
+    fixing Hangle Suggestion test
+
+commit 92f8d4507850d5d577be78b449ab21975e01638d
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 11:12:35 2017 -0600
+
+    Removing unused count columns in load board config
+
+commit e6feb1e580192bb26d4a92f901cc94c0dbfc5659
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 11:10:55 2017 -0600
+
+    making initalize use try catch instead of throwing
+
+commit 987389b5cfd235ac6ee4aa9ca8f34ba5b75362f9
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 11:07:35 2017 -0600
+
+    Adding comment for out of bounds check
+
+commit b9d9f5528af169101087df2cffe0d20e6301fd6a
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 11:06:39 2017 -0600
+
+    Moving out of bounds check to isAdj instead of calcAdjencies
+
+commit 97ea2d9219b7ab21edbe27d6ee5032af8d14c9ca
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 10:57:21 2017 -0600
+
+    Removing redundant isAdj checks
+
+commit af62501bd0dd96695a269de88bcbd25e979fd3a8
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Apr 4 10:46:41 2017 -0600
+
+    Adding comments to gameSetupTests
+
+commit e68ac7ae60f68d2bec42edf05790450cacb512ce
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Tue Mar 21 11:40:13 2017 -0600
+
+    Adding example gui and clue control gui
+
 commit 522481e5de9211574dfb19b6feea3f449080641e
 Author: Madison Klein <madisonklein@mines.edu>
 Date:   Mon Mar 20 22:25:43 2017 -0600

@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,7 +13,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Board {
+import javax.swing.*;
+
+public class Board extends JPanel {
 
 	private BoardCell[][] board;
 	private Map<BoardCell, Set <BoardCell>> adjacencyMap;
@@ -33,12 +36,22 @@ public class Board {
 	
 	public static final int MAX_BOARD_SIZE = 40;
 	
-	private Board() {
+	public Board() {
 		super();
 		adjacencyMap = new HashMap<BoardCell, Set<BoardCell>>();
 		visitedList = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
 		
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		for (int row = 0; row < numRows; row++) {
+			for (int col = 0; col < numCols; col++) {
+				board[row][col].draw(g);
+			}
+		}
 	}
 	
 		
@@ -63,6 +76,7 @@ public class Board {
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			System.out.println("initialize error");
 		}
 	}
 
@@ -313,6 +327,7 @@ public class Board {
 			}
 		}
 		catch (Exception e) {
+			System.out.println("load people error");
 			System.out.println(e.getMessage());
 		}
 	}

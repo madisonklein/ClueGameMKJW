@@ -1,3 +1,3 @@
 package clueGame;
 
-public enum DoorDirection { DOWN, UP, LEFT, RIGHT, NONE};
+public enum DoorDirection { DOWN, UP, LEFT, RIGHT, NONE, NAME};

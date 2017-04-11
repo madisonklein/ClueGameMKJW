@@ -31,10 +31,13 @@ public class Board extends JPanel {
 	private HumanPlayer human;
 	private ArrayList<Card> deck;
 	private Map<Player, ArrayList<Card>> hands;
-	private String[] weapons = { "knife", "brass knuckles", "rifle", "banana", "flail", "Spear" };
+	public String[] names = {"Dr. Rader", "Kevin", "Niki", "Brandon", "Maddie", "Bill Murray"};
+	public String[] weapons = { "knife", "brass knuckles", "rifle", "banana", "flail", "Spear" };
+	public String[] rooms = {"Master", "K-Room", "N-Room", "Library", "Dungeon", "Studio", "Bar", "Attic", "Cinema", "Hallway", "Rotunda"};
 	private Solution solution;
 	
 	public static final int MAX_BOARD_SIZE = 40;
+	
 	
 	public Board() {
 		super();
@@ -52,6 +55,8 @@ public class Board extends JPanel {
 				board[row][col].draw(g);
 			}
 		}
+		human.draw(g);
+		for (ComputerPlayer p: people) p.draw(g);
 	}
 	
 		
@@ -385,13 +390,14 @@ public class Board extends JPanel {
 		    	    
 		    //INITIALIZING THE BOARD LAYOUT
 		    for (String splitting: layout.split(",")) {
-		         if (col < numCols){
+		    	if (col < numCols){
 		        	 if(splitting.length() > 1){
+		        		
 		        		if((splitting.charAt(1) == 'D')) board[row][col].setDoorDirection(DoorDirection.DOWN);
 		        		if((splitting.charAt(1) == 'U')) board[row][col].setDoorDirection(DoorDirection.UP);
 		        		if((splitting.charAt(1) == 'L')) board[row][col].setDoorDirection(DoorDirection.LEFT);
 		        		if((splitting.charAt(1) == 'R')) board[row][col].setDoorDirection(DoorDirection.RIGHT);
-		        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NONE);
+		        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NAME);
 		        	 }
 		        	 	else{
 		        	 		board[row][col].setDoorDirection(DoorDirection.NONE); 
@@ -408,7 +414,7 @@ public class Board extends JPanel {
 			        		if((splitting.charAt(1) == 'U')) board[row][col].setDoorDirection(DoorDirection.UP);
 			        		if((splitting.charAt(1) == 'L')) board[row][col].setDoorDirection(DoorDirection.LEFT);
 			        		if((splitting.charAt(1) == 'R')) board[row][col].setDoorDirection(DoorDirection.RIGHT);
-			        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NONE);
+			        		if((splitting.charAt(1) == 'N')) board[row][col].setDoorDirection(DoorDirection.NAME);
 			        	 }
 			        else{
 			       		 board[row][col].setDoorDirection(DoorDirection.NONE); 

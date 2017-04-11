@@ -1,9 +1,12 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.*;
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends JComponent {
 	
 	private String playerName;
 	private int row;
@@ -16,6 +19,13 @@ public class Player {
 		this.row = row;
 		this.column = column;
 		this.color = color;
+	}
+	
+	public void draw(Graphics g) {
+		g.setColor(color);
+		g.fillOval(column*25, row*25, 25, 25);
+		g.setColor(Color.black);
+		g.drawOval(column*25, row*25, 25, 25);
 	}
 	
 	public Card disproveSuggestion(Solution suggestion) {

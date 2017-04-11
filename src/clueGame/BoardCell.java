@@ -1,5 +1,6 @@
 package clueGame;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.*;
@@ -22,6 +23,9 @@ public class BoardCell extends JComponent {
 	}
 	
 	public void draw(Graphics g) {
+		Board board = Board.getInstance();
+		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");
+		board.initialize();
 		if (this.isHallWay()) g.setColor(Color.yellow);
 		else g.setColor(Color.gray);
 //		else if (!this.isDoorway()) g.setColor(Color.gray);
@@ -46,8 +50,21 @@ public class BoardCell extends JComponent {
 			case LEFT:
 				g.fillRect(column*CELL_WIDTH, row*CELL_HEIGHT, 5, CELL_HEIGHT);
 				break;
-			}
+			case NAME:
+				g.setColor(Color.black);
+				g.setFont(new Font("Serif", Font.BOLD, 12));
+				g.drawString(board.getLegend().get(roomInitial), column*CELL_WIDTH, row*CELL_HEIGHT);
+				break;
+			default:
+				break;
+			}	
 		}
+//		if (this.doorDirection == DoorDirection.NONE) {
+//			g.setColor(Color.black);
+//			g.setFont(new Font("Serif", Font.BOLD, 12));
+//			g.drawString("test", 0, 0);
+//			//g.drawString(board.getLegend().get(roomInitial), column*CELL_WIDTH, row*CELL_HEIGHT);
+//		}
 	}
 	
 	public void setRoomInitial(char roomInitial) {

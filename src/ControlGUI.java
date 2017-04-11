@@ -1,4 +1,4 @@
-package experiment;
+
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -60,7 +60,7 @@ public class ControlGUI extends JPanel {
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(700,400);
+		frame.setSize(600,200);
 		ControlGUI gui = new ControlGUI();
 		frame.add(gui, BorderLayout.CENTER);
 		frame.setVisible(true);

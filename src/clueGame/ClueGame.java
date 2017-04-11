@@ -7,8 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.border.TitledBorder;
+
+
 import javax.swing.*;
 
 public class ClueGame extends JFrame implements ActionListener, ItemListener{
@@ -25,6 +28,9 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener{
 		board = new Board();
 		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");
 		board.initialize();
+		
+		JOptionPane.showMessageDialog(this, "You are Dr. Rader, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		
 		add(board, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -50,6 +56,31 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener{
 		addCheckBoxes(notesDialog, "Weapons", board.weapons,3,2);
 		addDropDowns(notesDialog, "Weapon Guess", board.weapons);
 		
+		ControlGUI control = new ControlGUI();
+		add(control, BorderLayout.SOUTH);
+		
+		ArrayList<Card> humanHand = board.getHands().get(board.getHumanPlayer());
+		JPanel cards = new JPanel(new GridLayout(3,1));
+		cards.setSize(300,700);
+		JPanel people = new JPanel(new GridLayout(4,1));
+		people.setBorder(new TitledBorder(null, "People"));
+		JPanel rooms = new JPanel(new GridLayout(4,1));
+		rooms.setBorder(new TitledBorder(null, "Rooms"));
+		JPanel weapons = new JPanel(new GridLayout(4,1));
+		weapons.setBorder(new TitledBorder(null, "Weapons"));
+		for (Card c: humanHand) {
+			JLabel card = new JLabel(c.getCardName() + "              ");
+			if (c.getCardType() == CardType.PERSON) {
+				people.add(card);
+			}
+			else if (c.getCardType() == CardType.ROOM) rooms.add(card);
+			else weapons.add(card);
+		}
+		cards.add(people);
+		cards.add(rooms);
+		cards.add(weapons);
+		
+		add(cards,BorderLayout.EAST);
 		
 	}
 	

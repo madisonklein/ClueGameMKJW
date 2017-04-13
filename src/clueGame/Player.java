@@ -94,6 +94,14 @@ public class Player extends JComponent {
 		this.column = col;
 	}
 	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getCol() {
+		return column;
+	}
+	
 	public ArrayList<String> getHand() {
 		return hand;
 	}

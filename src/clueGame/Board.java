@@ -35,11 +35,14 @@ public class Board extends JPanel {
 	public String[] weapons = { "knife", "brass knuckles", "rifle", "banana", "flail", "Spear" };
 	public String[] rooms = {"Master", "K-Room", "N-Room", "Library", "Dungeon", "Studio", "Bar", "Attic", "Cinema", "Hallway", "Rotunda"};
 	private Solution solution;
+	public int whoseTurn = -1;
+	public Card currentDisprove;
+	public Solution currentSuggestion;
 	
 	public static final int MAX_BOARD_SIZE = 40;
 	
 	
-	public Board() {
+	private Board() {
 		super();
 		adjacencyMap = new HashMap<BoardCell, Set<BoardCell>>();
 		visitedList = new HashSet<BoardCell>();
@@ -447,6 +450,25 @@ public class Board extends JPanel {
 			if (shownCard != null) return shownCard;
 		}
 		return null;
+	}
+	
+	public boolean doTurn(int roll) {
+		if (whoseTurn == -1) return false;
+		ComputerPlayer player = people.get(whoseTurn);
+		calcTargets(player.getRow(), player.getCol(), roll);
+		BoardCell newLoc = player.pickLocation(getTargets());
+		if (newLoc.isDoorway()) {
+			player.createSuggestion(legend.get(newLoc.getInitial()));
+			currentSuggestion = player.getSuggestion();
+			currentDisprove = handleSuggestion(player.getSuggestion(), human, people, whoseTurn);
+			if (whoseTurn == people.size() - 1) whoseTurn = -1;
+			else whoseTurn++;
+			return true;
+		}
+		if (whoseTurn == people.size() - 1) whoseTurn = -1;
+		else whoseTurn++;
+		return false;
+		
 	}
 }
 	

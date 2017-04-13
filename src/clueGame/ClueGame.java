@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
@@ -14,18 +16,20 @@ import javax.swing.border.TitledBorder;
 
 import javax.swing.*;
 
-public class ClueGame extends JFrame implements ActionListener, ItemListener{
+public class ClueGame extends JFrame implements ActionListener, ItemListener, MouseListener{
 	
 	Board board;
 	JMenuItem notes;
 	JMenuItem exit;
 	JDialog notesDialog;
+	JButton nextPlayer;
+	ControlGUI control;
 	
 	public ClueGame() {
 		setTitle("Clue Game");
 		setSize(700,700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		board = new Board();
+		board = Board.getInstance();
 		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");
 		board.initialize();
 		
@@ -56,7 +60,7 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener{
 		addCheckBoxes(notesDialog, "Weapons", board.weapons,3,2);
 		addDropDowns(notesDialog, "Weapon Guess", board.weapons);
 		
-		ControlGUI control = new ControlGUI();
+		control = new ControlGUI();
 		add(control, BorderLayout.SOUTH);
 		
 		ArrayList<Card> humanHand = board.getHands().get(board.getHumanPlayer());
@@ -81,6 +85,9 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener{
 		cards.add(weapons);
 		
 		add(cards,BorderLayout.EAST);
+		
+		nextPlayer = control.nextPlayer;
+		nextPlayer.addMouseListener(this);
 		
 	}
 	
@@ -126,6 +133,51 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener{
 		else if (ev.getSource() == exit) {
 			dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if (e.getSource() == nextPlayer) {
+			System.out.println("next player pressed");
+			int roll = (int)(Math.random() * 5) + 1;
+			control.updateRoll(roll);
+			// display roll
+			if (board.whoseTurn == -1) {
+				board.whoseTurn++;
+			}
+			else {
+				boolean disprove = board.doTurn(roll);
+				if (disprove) {
+					control.updateSuggestion(board.currentSuggestion, board.currentDisprove);
+				}
+				repaint();
+			}
+		}
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 

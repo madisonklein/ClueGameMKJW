@@ -24,8 +24,6 @@ public class BoardCell extends JComponent {
 	
 	public void draw(Graphics g) {
 		Board board = Board.getInstance();
-		board.setConfigFiles("Layout.csv", "Legend.txt", "People.txt");
-		board.initialize();
 		if (this.isHallWay()) g.setColor(Color.yellow);
 		else g.setColor(Color.gray);
 //		else if (!this.isDoorway()) g.setColor(Color.gray);

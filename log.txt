@@ -1,4 +1,10 @@
-We are using pair programming
+We are pair programming.
+
+commit e8ccb73eb4ca71c0214b1e00ada4d98a6d561bc4
+Author: Madison Klein <madisonklein@mines.edu>
+Date:   Mon Apr 10 22:02:44 2017 -0600
+
+    Added welcome dialog and rest of game display
 
 commit 9daf8e24b4d7f0bed208ef0287f23d4d878b9e9d
 Author: Madison Klein <madisonklein@mines.edu>

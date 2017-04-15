@@ -7,5 +7,5 @@ S, Studio, Card
 B, Bar, Card
 A, Attic, Card
 C, Cinema, Card
-H, Hallway, Other
+W, Walkway, Other
 X, Rotunda, Other

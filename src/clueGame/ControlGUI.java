@@ -15,6 +15,8 @@ public class ControlGUI extends JPanel {
 	JPanel guess;
 	JPanel guessResult;
 	JButton nextPlayer;
+	JButton makeAccusation;
+	JPanel whoseTurn;
 	
 
 	public ControlGUI() {
@@ -27,14 +29,14 @@ public class ControlGUI extends JPanel {
 	
 	public JPanel createTopPanel() {
 		nextPlayer = new JButton("Next Player");
-		JButton makeAccusation = new JButton("Make an accustion");
+		makeAccusation = new JButton("Make an accustion");
 		JPanel panel = new JPanel();
 		
-		JPanel whoseTurn = new JPanel();
+		whoseTurn = new JPanel();
 		JTextField text = new JTextField(20);
-		text.setEditable(false);
-		panel.add(text);
-		panel.setBorder(new TitledBorder(null, "Whose Turn?"));
+		text.setEditable(true);
+		whoseTurn.add(text);
+		whoseTurn.setBorder(new TitledBorder(null, "Whose Turn?"));
 		
 		panel.setLayout(new GridLayout(1,0));
 		panel.add(whoseTurn);
@@ -82,9 +84,24 @@ public class ControlGUI extends JPanel {
 	}
 	
 	public void updateSuggestion(Solution suggestion, Card card) {
+		String sugg;
+		String cardName;
+		if (suggestion == null) {
+			sugg = "";
+			cardName = "";
+		}
+		else {
+			sugg = suggestion.person + " " + suggestion.room + " " + suggestion.weapon;
+			cardName = card.getCardName();
+		}
 		JTextComponent sug = (JTextComponent) this.guess.getComponent(1);
-		sug.setText(suggestion.person + " " + suggestion.room + " " + suggestion.weapon);
+		sug.setText(sugg);
 		JTextComponent text = (JTextComponent) this.guessResult.getComponent(1);
-		text.setText(card.getCardName());
+		text.setText(cardName);
+	}
+	
+	public void updateWhoseTurn(String player) {
+		JTextComponent turn = (JTextComponent) this.whoseTurn.getComponent(0);
+		turn.setText(player);
 	}
 }

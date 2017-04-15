@@ -35,7 +35,7 @@ public class Board extends JPanel {
 	public String[] weapons = { "knife", "brass knuckles", "rifle", "banana", "flail", "Spear" };
 	public String[] rooms = {"Master", "K-Room", "N-Room", "Library", "Dungeon", "Studio", "Bar", "Attic", "Cinema", "Hallway", "Rotunda"};
 	private Solution solution;
-	public int whoseTurn = -1;
+	public int whoseTurn;
 	public Card currentDisprove;
 	public Solution currentSuggestion;
 	
@@ -73,14 +73,15 @@ public class Board extends JPanel {
 		//READING IN THE FILES AND COUNTING ROWS AND COLUMN
         
 		try {
+		loadRoomConfig();
 		loadBoardConfig();
-		loadRoomConfig();	
 	    
 		calcAdjacencies();
 		
 		loadPeople();
 		createDeck();
 		dealHands();
+		whoseTurn = people.size()-1;
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -106,6 +107,7 @@ public class Board extends JPanel {
 		targets.clear();
 		visitedList.add(board[row][col]);
 		findAllTargets(row, col, pathLength);
+		visitedList.clear();
 	}
 	
 	public void findAllTargets(int row, int col, int numSteps){
@@ -213,6 +215,10 @@ public class Board extends JPanel {
 				if (deck.size() == 0) break;
 				else hands.get(p).add(deck.remove(0));
 			}
+		}
+		human.setHand(hands.get(human));
+		for (Player p: people) {
+			p.setHand(hands.get(p));
 		}
 		
 	}
@@ -390,9 +396,11 @@ public class Board extends JPanel {
 			}
 		    int col = 0;
 		    int row = 0;
-		    	    
+		    
+		    if (layout.split(",").length != counterRow*counterCol) throw new BadConfigFormatException();
 		    //INITIALIZING THE BOARD LAYOUT
 		    for (String splitting: layout.split(",")) {
+		    	if (!legend.containsKey(splitting.charAt(0))) throw new BadConfigFormatException();
 		    	if (col < numCols){
 		        	 if(splitting.length() > 1){
 		        		
@@ -422,6 +430,7 @@ public class Board extends JPanel {
 			        else{
 			       		 board[row][col].setDoorDirection(DoorDirection.NONE); 
 			       	 }
+		        	 
 		        	 board[row][col].setRoomInitial(splitting.charAt(0));
 		        	 col += 1;
 		         }
@@ -452,6 +461,11 @@ public class Board extends JPanel {
 		return null;
 	}
 	
+	public void updateWhoseTurn() {
+		if (whoseTurn == people.size()-1) whoseTurn = -1;
+		else whoseTurn++;
+	}
+	
 	public boolean doTurn(int roll) {
 		if (whoseTurn == -1) return false;
 		ComputerPlayer player = people.get(whoseTurn);
@@ -465,10 +479,31 @@ public class Board extends JPanel {
 			else whoseTurn++;
 			return true;
 		}
-		if (whoseTurn == people.size() - 1) whoseTurn = -1;
-		else whoseTurn++;
 		return false;
 		
+	}
+	
+	public void showHumanTargets(int roll) {
+		if (whoseTurn != -1) return;
+		calcTargets(human.getRow(), human.getCol(), roll);
+		for (BoardCell b: getTargets()) {
+			b.setIsTarget(true);
+		}
+		human.finishTurn = true;
+	}
+	
+	public void moveHuman(BoardCell targ) {
+		human.setRow(targ.getRow());
+		human.setColumn(targ.getColumn());
+		for (BoardCell b: getTargets()) {
+			b.setIsTarget(false);
+		}
+		human.finishTurn = false;
+	}
+	
+	public String getCurrentPlayer() {
+		if (whoseTurn == -1) return human.getName();
+		else return people.get(whoseTurn).getName();
 	}
 }
 	

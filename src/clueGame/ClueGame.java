@@ -23,6 +23,7 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener, Mo
 	JMenuItem exit;
 	JDialog notesDialog;
 	JButton nextPlayer;
+	JButton makeAccusation;
 	ControlGUI control;
 	
 	public ClueGame() {
@@ -87,7 +88,10 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener, Mo
 		add(cards,BorderLayout.EAST);
 		
 		nextPlayer = control.nextPlayer;
+		makeAccusation = control.makeAccusation;
 		nextPlayer.addMouseListener(this);
+		makeAccusation.addMouseListener(this);
+		board.addMouseListener(this);
 		
 	}
 	
@@ -110,6 +114,14 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener, Mo
 		}
 		panel.add(combo);
 		dialog.add(panel);
+	}
+	
+	public void displayError(String err) {
+		JOptionPane.showMessageDialog(this, err , "Error", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public void showAccusation() {
+		System.out.println("makeAccusation pressed");
 	}
 	
 	public static void main(String[] args) {
@@ -157,20 +169,44 @@ public class ClueGame extends JFrame implements ActionListener, ItemListener, Mo
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (e.getSource() == nextPlayer) {
-			System.out.println("next player pressed");
+			if (board.whoseTurn == -1 && board.getHumanPlayer().finishTurn == true) {
+				displayError("Finish turn before moving onto next player!");
+				return;
+			}
+			board.updateWhoseTurn();
+			control.updateWhoseTurn(board.getCurrentPlayer());
 			int roll = (int)(Math.random() * 5) + 1;
 			control.updateRoll(roll);
 			// display roll
 			if (board.whoseTurn == -1) {
-				board.whoseTurn++;
+				board.showHumanTargets(roll);
+				repaint();
 			}
 			else {
 				boolean disprove = board.doTurn(roll);
 				if (disprove) {
 					control.updateSuggestion(board.currentSuggestion, board.currentDisprove);
 				}
+				else control.updateSuggestion(null, null);
 				repaint();
 			}
+		}
+		else if (board.whoseTurn == -1 && board.getHumanPlayer().finishTurn == true) {
+			if (e.getSource() == makeAccusation) {
+				showAccusation();
+			}
+			System.out.println("inside else if");
+			int x = e.getX();
+			int y = e.getY();
+			for (BoardCell b: board.getTargets()) {
+				if (x > b.getColumn()*b.CELL_WIDTH && x < (b.getColumn()+1)*b.CELL_WIDTH && y > b.getRow()*b.CELL_HEIGHT && y < (b.getRow()+1)*b.CELL_HEIGHT) {
+					board.moveHuman(b);
+					repaint();
+					return;
+				}
+					
+			}
+			displayError("That is not a valid target");
 		}
 		
 	}

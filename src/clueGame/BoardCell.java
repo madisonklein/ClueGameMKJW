@@ -12,8 +12,9 @@ public class BoardCell extends JComponent {
 	private int row, column;
 	private char roomInitial;
 	private DoorDirection doorDirection;
-	private static int CELL_HEIGHT = 25;
-	private static int CELL_WIDTH = 25;
+	public static int CELL_HEIGHT = 25;
+	public static int CELL_WIDTH = 25;
+	private boolean isTarget = false;
 
 	//CONSTRUCTOR
 	public BoardCell(int row, int column) {
@@ -24,10 +25,9 @@ public class BoardCell extends JComponent {
 	
 	public void draw(Graphics g) {
 		Board board = Board.getInstance();
-		if (this.isHallWay()) g.setColor(Color.yellow);
+		if (this.isTarget) g.setColor(Color.cyan);
+		else if (this.isHallWay()) g.setColor(Color.yellow);
 		else g.setColor(Color.gray);
-//		else if (!this.isDoorway()) g.setColor(Color.gray);
-//		else g.setColor(Color.blue);
 		g.fillRect(column*CELL_WIDTH, row*CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 		if (this.isHallWay()) {
 			g.setColor(Color.black);
@@ -80,7 +80,7 @@ public class BoardCell extends JComponent {
 	}
 	
 	public boolean isDoorway(){
-		if(this.doorDirection != DoorDirection.NONE){
+		if(this.doorDirection != DoorDirection.NONE && this.doorDirection != DoorDirection.NAME){
 			return true;
 		}
 			return false;
@@ -119,6 +119,9 @@ public class BoardCell extends JComponent {
 	
 	public DoorDirection getDoorDirection(){
 		return doorDirection;
+	}
+	public void setIsTarget(boolean targ) {
+		this.isTarget = targ;
 	}
 
 }
